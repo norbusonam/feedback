@@ -23,6 +23,14 @@ func main() {
 	}
 	defer db.Close()
 
+	// ping database
+	err = db.Ping()
+	if err != nil {
+		log.Fatal("Could not connect to database ❌")
+	} else {
+		log.Println("Connected to database ✅")
+	}
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello World!"))
 	})
