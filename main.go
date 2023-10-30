@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	// figure out what port to listen on
 	port := ":8080"
 	if os.Getenv("PORT") != "" {
 		port = ":" + os.Getenv("PORT")
@@ -35,5 +36,6 @@ func main() {
 		w.Write([]byte("Hello World!"))
 	})
 
+	// start server
 	log.Fatal(http.ListenAndServe(port, nil))
 }
