@@ -16,7 +16,7 @@ func main() {
 	}
 
 	// connect to database
-	dbUrl := "postgresql://postgres@localhost:5432/feedback"
+	dbUrl := "postgresql://postgres@localhost:5432/feedback?sslmode=disable"
 	db, err := sql.Open("postgres", dbUrl)
 	if err != nil {
 		log.Fatal(err)
