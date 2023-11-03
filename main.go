@@ -9,6 +9,9 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// create feedback in database
+func createFeedback(w http.ResponseWriter, r *http.Request, db *sql.DB) {}
+
 func main() {
 	// figure out what port to listen on
 	port := ":8080"
@@ -34,6 +37,15 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello World!"))
+	})
+
+	http.HandleFunc("/api/feedback", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			createFeedback(w, r, db)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
 	})
 
 	// start server
